@@ -5,7 +5,6 @@ import { fecthSongsAction } from "../../action";
 import SongItem from "../../components/SongItem";
 import SongList from "../../components/SongList";
 
-
 function Home() {
   const dispatch = useDispatch();
 
@@ -18,7 +17,9 @@ function Home() {
   }, []);
 
   return (
-    <div>
+    <div
+    style={{background: "linear-gradient(#43c6ac, #191654);" }}
+    >
       <h1 style={{ textAlign: "center", fontSize: 40 }}>SONG LIST</h1>
       <SongList />
     </div>

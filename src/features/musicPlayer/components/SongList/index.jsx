@@ -2,6 +2,8 @@ import React from "react";
 import SongItem from "../SongItem";
 import { useSelector } from "react-redux";
 
+
+
 function SongList() {
   const songList = useSelector((state) => state.musicPlayer.songs);
   console.log(songList);
