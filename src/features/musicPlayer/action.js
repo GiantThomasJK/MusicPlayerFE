@@ -27,14 +27,14 @@ export const fetchSongDetailAction = (songId) => {
   return async (dispatch) => {
     try {
       const res = await instance.request({
-        url: "/products" + songId,
+        url: "/products/" + songId,
         method: "GET",
       });
       console.log("detail");
       console.log(res);
       dispatch({
         type: actionTypes.SET_SONGS_DETAIL,
-        payload: res.data.content,
+        payload: res.data,
       });
     } catch (err) {}
   };

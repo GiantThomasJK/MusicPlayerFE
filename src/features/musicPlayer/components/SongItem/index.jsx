@@ -1,19 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import SongList from "../SongList";
 import { Button, Card, Table, Image } from "antd";
 
 function SongItem(props) {
-  const { title, price, description, image, id } = props.item;
-  const songFetch = [];
-  console.log(props.item.title);
   const history = useHistory();
 
-  console.log(props.item);
-  const goToDetail = () => {
+  const goToDetail = (id) => {
     history.push("/detail/" + id);
   };
+
 
   const column = [
     {
@@ -49,7 +46,7 @@ function SongItem(props) {
       render: (_, songs) => {
         return (
           <>
-            <Button onClick={goToDetail} type="primary">
+            <Button onClick={() => goToDetail(songs.id)} type="primary">
               Update
             </Button>
             <Button type="primary" danger>
@@ -67,9 +64,8 @@ function SongItem(props) {
       headStyle={{ backgroundColor: "#000000", color: "#ffffff" }}
     >
       <Table
-        key={props.item.id}
-        dataSource={props.item.map((song) => {
-          return ({...song,})
+        dataSource={props.songList.map((song) => {
+          return { ...song, key: song.id };
         })}
         columns={column}
       ></Table>

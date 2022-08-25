@@ -11,7 +11,7 @@ function App() {
       <Header />
       <Switch>
         <Route path="/" component={Home} exact/>
-        <Route path="/detail"  component={Detail}/>
+        <Route path="/detail/:id"  component={Detail}/>
         <Route path="*" component={PageNotFound}/>
         <Redirect to="/" />
       </Switch>

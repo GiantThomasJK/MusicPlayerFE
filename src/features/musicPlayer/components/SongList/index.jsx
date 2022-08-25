@@ -11,15 +11,12 @@ function SongList() {
         <h1>Loading...</h1>
       </div>
     );
+
   return (
     <div className="container">
-        {songList.map((item) => {
+      <SongItem key={songList.id} songList={songList} />
 
-          return (
-              <SongItem item={item} songList={songList}  />
-          )
-        })}
-        {/* <SongItem songList={songList} /> */}
+      {/* <SongItem songList={songList} /> */}
     </div>
   );
 }
