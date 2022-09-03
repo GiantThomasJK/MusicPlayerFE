@@ -3,6 +3,7 @@ import PageNotFound from "../common/components/404";
 import Header from "../common/components/Header";
 import Detail from "../features/musicPlayer/pages/Detail";
 import Home from "../features/musicPlayer/pages/Home";
+import AddSong from "features/musicPlayer/pages/AddSong";
 
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
       <Switch>
         <Route path="/" component={Home} exact/>
         <Route path="/detail/:id"  component={Detail}/>
+        <Route path="/addSong" component={AddSong} />
         <Route path="*" component={PageNotFound}/>
         <Redirect to="/" />
       </Switch>

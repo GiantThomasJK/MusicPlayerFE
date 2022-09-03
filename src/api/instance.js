@@ -1,7 +1,7 @@
 const { default: axios } = require("axios");
 
 const instance = axios.create({
-  baseURL: "https://fakestoreapi.com/",
+  baseURL: "http://localhost:8080/music/",
 
 });
 

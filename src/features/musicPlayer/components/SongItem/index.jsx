@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import SongList from "../SongList";
 import { Button, Card, Table, Image } from "antd";
+import SongAudio from "common/components/audio";
 
 function SongItem(props) {
   const history = useHistory();
@@ -15,27 +16,32 @@ function SongItem(props) {
   const column = [
     {
       title: "Name",
-      dataIndex: "title",
+      dataIndex: "name",
+      render: (_, songs) => {
+        return (
+          <div className="d-flex align-items-center">
+          <img src={songs.thumbnail} className="rounded-circle" alt="" style={{width: 45, height: 45}} />
+          <div className="ms-3">
+            <p className="fw-bold mb-1">{songs.name}</p>
+          </div>
+        </div>
+        )
+      }
     },
     {
       title: "Author",
-      dataIndex: "description",
+      dataIndex: "author",
     },
     {
       title: "Gerne",
-      dataIndex: "price",
+      dataIndex: "genre",
     },
     {
-      title: "Image",
-      dataIndex: "image",
+      title: "Audio",
+      dataIndex: "src",
       render: (_, songs) => {
         return (
-          <Image
-            width={100}
-            height={150}
-            src="https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg"
-            alt=""
-          />
+          <SongAudio songs={songs} />
         );
       },
     },
@@ -46,7 +52,7 @@ function SongItem(props) {
       render: (_, songs) => {
         return (
           <>
-            <Button onClick={() => goToDetail(songs.id)} type="primary">
+            <Button style={{marginRight: 10}} onClick={() => goToDetail(songs.id)} type="primary">
               Update
             </Button>
             <Button type="primary" danger>

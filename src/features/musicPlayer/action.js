@@ -8,7 +8,7 @@ export const actionTypes = {
 export const fecthSongsAction = async (dispatch) => {
   try {
     const res = await instance.request({
-      url: "/products",
+      url: "/all",
       method: "GET",
     });
 
@@ -16,7 +16,7 @@ export const fecthSongsAction = async (dispatch) => {
 
     dispatch({
       type: actionTypes.SET_SONGS,
-      payload: res.data,
+      payload: res.data.object,
     });
 
     return res.data.content;
@@ -27,14 +27,17 @@ export const fetchSongDetailAction = (songId) => {
   return async (dispatch) => {
     try {
       const res = await instance.request({
-        url: "/products/" + songId,
+        url: "/get/",
         method: "GET",
+        params: {
+          id : songId
+        }
       });
       console.log("detail");
       console.log(res);
       dispatch({
         type: actionTypes.SET_SONGS_DETAIL,
-        payload: res.data,
+        payload: res.data.object,
       });
     } catch (err) {}
   };
