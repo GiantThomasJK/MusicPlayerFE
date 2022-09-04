@@ -2,12 +2,14 @@ import React, { useEffect } from "react";
 import { useRouteMatch } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Spin, Col, Row, Card, Button, Image, Input } from "antd";
-import { fetchSongDetailAction } from "../../action";
+import { actionTypes, fetchSongDetailAction } from "../../action";
 import SongAudio from "../../../../common/components/audio";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import styles from "./style.module.css";
 import SongDetail from "../SongDetail";
+import instance from "api/instance";
+import { useState } from "react";
 const moment = require("moment");
 
 const schema = yup.object().shape({
@@ -22,9 +24,10 @@ const schema = yup.object().shape({
 function Detail() {
   const match = useRouteMatch();
   const songId = match.params.id;
+  const [isLoading, setIsLoading] = useState(false);
 
   const selectedSong = useSelector((state) => state.musicPlayer.songDetail);
-  console.log(selectedSong);
+  // console.log(selectedSong);
 
   const dispatch = useDispatch();
 
@@ -32,29 +35,58 @@ function Detail() {
     await dispatch(fetchSongDetailAction(songId));
   };
 
-  const formik = useFormik({
+  useEffect(() => {
+    fetchSongDetail();
+  }, []);
+
+  const formik =  useFormik({
     initialValues: {
+      id: songId,
       name: "",
       author: "",
       genre: "",
-      src: "",
-      thumbnail: "",
     },
 
     onSubmit: (values) => {
       console.log(values);
+      updateSong(values);
     },
 
     validationSchema: schema,
   });
 
-  useEffect(() => {
-    fetchSongDetail();
-  }, []);
+  console.log(formik.values.id);
+
+  const updateSong = async (song) => {
+    try {
+      setIsLoading(true);
+      const res = await instance.request({
+        url: "/update",
+        method: "PUT",
+        data: song,
+      });
+
+      alert("Update thành công")
+
+      dispatch({
+        type: actionTypes.SET_UPDATE_SONG,
+        payload: res.data,
+      });
+
+      console.log(res.data);
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+
 
   if (!selectedSong) {
     return <Spin />;
   }
+
   return (
     <div className="container">
       <Row style={{ textAlign: "center", marginTop: 20 }}>
@@ -82,8 +114,8 @@ function Detail() {
                 onBlur={formik.handleBlur}
                 className={styles.input}
                 type="text"
-                placeholder="Song Name"
-                value={selectedSong.name}
+                placeholder={selectedSong.name}
+                value={formik.values.name}
               />
             </div>
             {formik.touched.name && formik.errors.name && (
@@ -101,8 +133,8 @@ function Detail() {
                 onBlur={formik.handleBlur}
                 className={styles.input}
                 type="text"
-                placeholder="Author"
-                value={selectedSong.author}
+                placeholder={selectedSong.author}
+                value={formik.values.author}
               />
             </div>
             {formik.touched.author && formik.errors.author && (
@@ -118,14 +150,14 @@ function Detail() {
                 onBlur={formik.handleBlur}
                 className={styles.input}
                 type="text"
-                placeholder="Genre"
-                value={selectedSong.genre}
+                placeholder={selectedSong.genre}
+                value={formik.values.genre}
               />
             </div>
             {formik.touched.genre && formik.errors.genre && (
               <p className={styles.errorText}>{formik.errors.genre}</p>
             )}
-
+            {/*
             <div className={styles.card}>
               <label className={styles.label} style={{ color: "#fff" }}>
                 Thumbnail:
@@ -143,9 +175,9 @@ function Detail() {
             </div>
             {formik.touched.thumbnail && formik.errors.thumbnail && (
               <p className={styles.errorText}>{formik.errors.thumbnail}</p>
-            )}
+            )} */}
 
-            <div className={styles.card}>
+            {/* <div className={styles.card}>
               <label className={styles.label} style={{ color: "#fff" }}>
                 Audio:
               </label>
@@ -162,7 +194,7 @@ function Detail() {
             </div>
             {formik.touched.thumbnail && formik.errors.thumbnail && (
               <p className={styles.errorText}>{formik.errors.thumbnail}</p>
-            )}
+            )} */}
 
             <div className={styles.card}>
               <label className={styles.label} style={{ color: "#fff" }}>

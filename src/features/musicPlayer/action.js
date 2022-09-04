@@ -3,6 +3,7 @@ import instance from "../../api/instance";
 export const actionTypes = {
   SET_SONGS: "musicPlayer/SET_SONGS",
   SET_SONGS_DETAIL: "musicPlayer/SET_SONGS_DETAIL",
+  SET_UPDATE_SONG: "musicPlayer/SET_UPDATE_SONG",
 };
 
 export const fecthSongsAction = async (dispatch) => {
@@ -11,8 +12,6 @@ export const fecthSongsAction = async (dispatch) => {
       url: "/all",
       method: "GET",
     });
-
-    console.log(res);
 
     dispatch({
       type: actionTypes.SET_SONGS,
@@ -30,11 +29,9 @@ export const fetchSongDetailAction = (songId) => {
         url: "/get/",
         method: "GET",
         params: {
-          id : songId
-        }
+          id: songId,
+        },
       });
-      console.log("detail");
-      console.log(res);
       dispatch({
         type: actionTypes.SET_SONGS_DETAIL,
         payload: res.data.object,

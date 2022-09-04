@@ -173,7 +173,7 @@ function AddSong() {
           />
         </div>
 
-        <Button htmlType="submit" className={styles.button} type="primary">
+        <Button loading={isLoading} htmlType="submit" className={styles.button} type="primary">
           Add Song
         </Button>
 
