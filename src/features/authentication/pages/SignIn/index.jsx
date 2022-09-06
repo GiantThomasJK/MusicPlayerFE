@@ -44,7 +44,6 @@ function SignIn() {
         method: "POST",
         data: user,
       });
-      console.log(res.data.object[0]);
 
       const profile = { ...res.data.object[1] };
       localStorage.setItem("token", res.data.object[0]);

@@ -14,10 +14,8 @@ function App() {
       <Header />
       <Switch>
         <PrivateRoute path="/" component={Home} redirectPath="/Signin" exact />
-        <Route path="/detail/:id" component={Detail} />
-        <Route path="/addSong" component={AddSong} />
-        {/* <Route path="/Signin" component={SignIn} />
-        <Route path="/Signup" component={SignUp} /> */}
+        <PrivateRoute path="/detail/:id" component={Detail} redirectPath="/Signin" />
+        <PrivateRoute path="/addSong" component={AddSong} redirectPath="/Signin" />
 
         <AuthRoute path="/Signin" component={SignIn} redirectPath="/" />
         <Route path="*" component={PageNotFound} />

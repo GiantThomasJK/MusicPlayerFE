@@ -104,7 +104,7 @@ function Detail() {
         <Col xs={12}>
           <form onSubmit={formik.handleSubmit} className={styles.form}>
             <div className={styles.card}>
-              <label className={styles.label} style={{ color: "#fff" }}>
+              <label className={styles.label} >
                 Song Name:{" "}
               </label>
 
@@ -123,7 +123,7 @@ function Detail() {
             )}
 
             <div className={styles.card}>
-              <label className={styles.label} style={{ color: "#fff" }}>
+              <label className={styles.label} >
                 Author:
               </label>
 
@@ -141,7 +141,7 @@ function Detail() {
               <p className={styles.errorText}>{formik.errors.author}</p>
             )}
             <div className={styles.card}>
-              <label className={styles.label} style={{ color: "#fff" }}>
+              <label className={styles.label} >
                 Genre:
               </label>
               <Input
@@ -159,7 +159,7 @@ function Detail() {
             )}
             {/*
             <div className={styles.card}>
-              <label className={styles.label} style={{ color: "#fff" }}>
+              <label className={styles.label} >
                 Thumbnail:
               </label>
               <Input
@@ -197,7 +197,7 @@ function Detail() {
             )} */}
 
             <div className={styles.card}>
-              <label className={styles.label} style={{ color: "#fff" }}>
+              <label className={styles.label}>
                 Last update :{" "}
               </label>
               {/* <label  style={{ color: "#fff" }}>{selectedSong.updateAt}</label> */}
@@ -213,7 +213,7 @@ function Detail() {
               />
             </div>
 
-            <Button htmlType="submit" className={styles.button} type="primary">
+            <Button loading={isLoading} htmlType="submit" className={styles.button} type="primary">
               Update
             </Button>
           </form>

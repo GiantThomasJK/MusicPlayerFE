@@ -67,7 +67,7 @@ function AddSong() {
       {" "}
       <form onSubmit={formik.handleSubmit} className={styles.form}>
         <div className={styles.card}>
-          <label className={styles.label} style={{ color: "#fff" }}>
+          <label className={styles.label} >
             Song Name:{" "}
           </label>
 
@@ -86,7 +86,7 @@ function AddSong() {
         )}
 
         <div className={styles.card}>
-          <label className={styles.label} style={{ color: "#fff" }}>
+          <label className={styles.label} >
             Author:
           </label>
 
@@ -104,7 +104,7 @@ function AddSong() {
           <p className={styles.errorText}>{formik.errors.author}</p>
         )}
         <div className={styles.card}>
-          <label className={styles.label} style={{ color: "#fff" }}>
+          <label className={styles.label} >
             Genre:
           </label>
           <Input
@@ -122,7 +122,7 @@ function AddSong() {
         )}
 
         <div className={styles.card}>
-          <label className={styles.label} style={{ color: "#fff" }}>
+          <label className={styles.label} >
             Image:
           </label>
           <Input
@@ -141,7 +141,7 @@ function AddSong() {
         )}
 
         <div className={styles.card}>
-          <label className={styles.label} style={{ color: "#fff" }}>
+          <label className={styles.label} >
             Audio:
           </label>
           <Input
@@ -158,7 +158,7 @@ function AddSong() {
         )}
 
         <div className={styles.card}>
-          <label className={styles.label} style={{ color: "#fff" }}>
+          <label className={styles.label} >
             Last update :{" "}
           </label>
           {/* <label  style={{ color: "#fff" }}>{selectedSong.updateAt}</label> */}
