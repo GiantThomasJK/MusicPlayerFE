@@ -1,15 +1,22 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import SongList from "../SongList";
 import { Button, Card, Table, Image } from "antd";
 import SongAudio from "common/components/audio";
+import { deleteSongAction } from "features/musicPlayer/action";
 
 function SongItem(props) {
   const history = useHistory();
 
   const goToDetail = (id) => {
     history.push("/detail/" + id);
+  };
+
+  const dispatch = useDispatch();
+
+  const deleteSong = async (songId) => {
+    await dispatch(deleteSongAction(songId));
   };
 
 
@@ -55,7 +62,7 @@ function SongItem(props) {
             <Button style={{marginRight: 10}} onClick={() => goToDetail(songs.id)} type="primary">
               Update
             </Button>
-            <Button type="primary" danger>
+            <Button type="primary" onClick={() => deleteSong(songs.id)} danger>
               Delete
             </Button>
           </>

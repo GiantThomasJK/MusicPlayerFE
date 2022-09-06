@@ -1,0 +1,21 @@
+.form{
+    width: 30%;
+    text-align: center;
+    margin: auto;
+}
+
+.title{
+    text-align: center;
+    font-size: 30px;
+    font-weight: 500;
+    color: #fff;
+
+}
+
+.input {
+    margin-top: 10px;
+}
+
+.errorText{
+    color: red;
+}

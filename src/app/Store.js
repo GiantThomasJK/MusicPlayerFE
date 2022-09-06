@@ -1,9 +1,11 @@
-import { combineReducers, createStore,  applyMiddleware, compose} from "redux";
+import { combineReducers, createStore, applyMiddleware, compose } from "redux";
 import musicReducer from "../../src/features/musicPlayer/musicSlice";
 import thunk from "redux-thunk";
+import authReducer from "features/authentication/authSlice";
 
 const rootReducer = combineReducers({
   musicPlayer: musicReducer,
+  auth: authReducer,
 });
 const logger = (state) => {
   return (next) => {
@@ -33,7 +35,6 @@ const store = createStore(
   rootReducer,
   // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   composeEnhancers(applyMiddleware(thunk, logger))
-
 );
 
 export default store;
