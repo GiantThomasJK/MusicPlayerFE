@@ -7,10 +7,7 @@ import { SET_PROFILE } from "features/authentication/action";
 function Header() {
   const history = useHistory();
   const dispatch = useDispatch();
-
-  console.log(history);
-  const userProfile = useSelector((state) => state.auth.profile);
-  console.log(userProfile);
+  let user = {};
 
   const goToHome = () => {
     history.push("/");
@@ -18,47 +15,55 @@ function Header() {
 
   const handleLogout = (e) => {
     e.preventDefault();
+    localStorage.removeItem("USER_LOGIN");
     localStorage.removeItem("token");
+
     dispatch({
       type: SET_PROFILE,
       payload: null,
     });
 
-    goToHome();
+    history.push("/Signin")
   };
 
   const renderUserInfo = () => {
-    if (userProfile) {
+    if (localStorage.getItem("USER_LOGIN")) {
+      user = JSON.parse(localStorage.getItem("USER_LOGIN"));
       return (
         <>
-          <a href="#">Hi, {userProfile[0]}{userProfile[1]}{userProfile[2]}{userProfile[3]}{userProfile[4]}</a>
+          <a href="#">
+            Hi, {user[0]}
+            {user[1]}
+            {user[2]}
+            {user[3]}
+            {user[4]}
+          </a>
           <a href="#" onClick={handleLogout}>
             Log out
           </a>
-
         </>
       );
     }
 
     return (
       <>
-        <NavLink className="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md  border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700"  to="/Signin">
-          Sign In
-        </NavLink>
+         <a
+          className="mr-4 pointer-events-auto ml-8 rounded-md bg-indigo-600 py-2 px-3 text-[0.8125rem] font-semibold leading-5 text-white hover:bg-indigo-500"
+          href=""
+        >
+          Sign in
+        </a>
 
       </>
     );
   };
 
   return (
-    <div  className={styles.header}>
+    <div className={styles.header}>
       <span onClick={goToHome} className={styles.logo} href="#">
         Music Player
       </span>
       <nav className={styles.navbar}>
-        <NavLink activeClassName={styles.active} to="/" exact>
-          Home
-        </NavLink>
         {renderUserInfo()}
       </nav>
     </div>

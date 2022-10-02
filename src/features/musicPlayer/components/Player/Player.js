@@ -42,8 +42,6 @@ function Player(props) {
         }
     }
 
-    console.log(props.selectedSong.src);
-
     return (
         <div className={styles.c_player}>
             <audio src={props.selectedSong.src} ref={audioEl}></audio>

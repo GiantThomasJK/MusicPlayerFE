@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import SongList from "../SongList";
 import { Button, Card, Table, Image } from "antd";
 import SongAudio from "common/components/audio";
@@ -19,7 +19,6 @@ function SongItem(props) {
     await dispatch(deleteSongAction(songId));
   };
 
-
   const column = [
     {
       title: "Name",
@@ -27,13 +26,18 @@ function SongItem(props) {
       render: (_, songs) => {
         return (
           <div className="d-flex align-items-center">
-          <img src={songs.thumbnail} className="rounded-circle" alt="" style={{width: 45, height: 45}} />
-          <div className="ms-3">
-            <p className="fw-bold mb-1">{songs.name}</p>
+            <img
+              src={songs.thumbnail}
+              className="rounded-circle"
+              alt=""
+              style={{ width: 45, height: 45 }}
+            />
+            <div className="ms-3">
+              <p className="fw-bold mb-1">{songs.name}</p>
+            </div>
           </div>
-        </div>
-        )
-      }
+        );
+      },
     },
     {
       title: "Author",
@@ -47,9 +51,7 @@ function SongItem(props) {
       title: "Audio",
       dataIndex: "src",
       render: (_, songs) => {
-        return (
-          <SongAudio songs={songs} />
-        );
+        return <SongAudio songs={songs} />;
       },
     },
 
@@ -59,9 +61,17 @@ function SongItem(props) {
       render: (_, songs) => {
         return (
           <>
-            <Button style={{marginRight: 10}} onClick={() => goToDetail(songs.id)} type="primary">
+            <NavLink
+              style={{ marginRight: 10 }}
+              onClick={() => {
+                goToDetail(songs.id);
+                localStorage.setItem("songDetail", JSON.stringify(songs));
+              }}
+              type="primary"
+              to={`/detail/${songs.id}`}
+            >
               Update
-            </Button>
+            </NavLink>
             <Button type="primary" onClick={() => deleteSong(songs.id)} danger>
               Delete
             </Button>

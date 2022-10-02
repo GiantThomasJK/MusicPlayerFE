@@ -18,7 +18,6 @@ function Home() {
   const history = useHistory();
   const { Search } = Input;
 
-
   const goToAddSong = () => {
     history.push("/addSong");
   };
@@ -33,13 +32,11 @@ function Home() {
   return (
     <div
       className="container"
-      style={{ background: "linear-gradient(#43c6ac, #191654);" }}
     >
       <h1
         style={{
           textAlign: "center",
           fontSize: 40,
-          color: "#fff",
           marginTop: 20,
         }}
       >
@@ -57,17 +54,9 @@ function Home() {
           </span>
         </button>
 
-        {/* <Button
-          onClick={goToAddSong}
-          className={styles.button}
-          htmlType="submit"
-          type="primary"
-        >
-          Add Song
-        </Button> */}
         <Space className={styles.search}>
           <Search
-            style={{fontSize: 25, width: 400}}
+            style={{ fontSize: 25, width: 400 }}
             placeholder="Search song"
             allowClear
             enterButton="Search"
@@ -77,7 +66,6 @@ function Home() {
               setSearchTerm(e.target.value);
             }}
           />
-
         </Space>
       </div>
       <SongList searchTerm={searchTerm} setSearchTerm={setSearchTerm} />

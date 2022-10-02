@@ -28,6 +28,6 @@ export const PrivateRoute = (props) => {
   if (checkLogin()) {
     return <Route path={path} component={component} />;
   }
-  alert("Vui lòng đăng nhập")
+
   return <Redirect to={redirectPath} />;
 };

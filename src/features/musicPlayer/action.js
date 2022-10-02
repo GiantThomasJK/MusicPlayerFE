@@ -1,3 +1,4 @@
+import swal from "sweetalert";
 import instance from "../../api/instance";
 
 export const actionTypes = {
@@ -33,6 +34,7 @@ export const fetchSongDetailAction = (songId) => {
           id: songId,
         },
       });
+
       dispatch({
         type: actionTypes.SET_SONGS_DETAIL,
         payload: res.data.object,
@@ -52,7 +54,14 @@ export const deleteSongAction = (songId) => {
         },
       });
 
-      alert("Xóa thành công");
+      if (res.data.status === "ok") {
+        swal({
+          title: "Deleted!",
+          text: "Song Deleted Successfully",
+          icon: "warning",
+          button: "OK",
+        });
+      }
       dispatch({
         type: actionTypes.DELETE_SONG,
         payload: res.data.object,

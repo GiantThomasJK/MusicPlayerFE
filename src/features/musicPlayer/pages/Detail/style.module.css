@@ -1,3 +1,10 @@
+
+
+*{
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+
+}
 .form{
     width: 80%;
     text-align: center;

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useFormik } from "formik";
 import styles from "./style.module.css";
 import { Spin, Col, Row, Card, Button, Image, Input } from "antd";
+import swal from "sweetalert";
 
 import * as yup from "yup";
 import instance from "api/instance";
@@ -54,7 +55,14 @@ function AddSong() {
         data: song,
       });
       console.log(res.data);
-      alert("Thêm bài hát thành công");
+      if (res.data.status === "ok") {
+        swal({
+          title: "Uploaded!",
+          text: "Song Uploaded Successfully",
+          icon: "success",
+          button: "OK",
+        });
+      }
     } catch (err) {
       console.log(err);
     } finally {
@@ -67,9 +75,7 @@ function AddSong() {
       {" "}
       <form onSubmit={formik.handleSubmit} className={styles.form}>
         <div className={styles.card}>
-          <label className={styles.label} >
-            Song Name:{" "}
-          </label>
+          <label className={styles.label}>Song Name: </label>
 
           <Input
             name="name"
@@ -86,9 +92,7 @@ function AddSong() {
         )}
 
         <div className={styles.card}>
-          <label className={styles.label} >
-            Author:
-          </label>
+          <label className={styles.label}>Author:</label>
 
           <Input
             name="author"
@@ -104,9 +108,7 @@ function AddSong() {
           <p className={styles.errorText}>{formik.errors.author}</p>
         )}
         <div className={styles.card}>
-          <label className={styles.label} >
-            Genre:
-          </label>
+          <label className={styles.label}>Genre:</label>
           <Input
             name="genre"
             onChange={formik.handleChange}
@@ -122,9 +124,7 @@ function AddSong() {
         )}
 
         <div className={styles.card}>
-          <label className={styles.label} >
-            Image:
-          </label>
+          <label className={styles.label}>Image:</label>
           <Input
             name="thumbnail"
             onChange={(e) =>
@@ -141,9 +141,7 @@ function AddSong() {
         )}
 
         <div className={styles.card}>
-          <label className={styles.label} >
-            Audio:
-          </label>
+          <label className={styles.label}>Audio:</label>
           <Input
             name="src"
             onChange={(e) => formik.setFieldValue("src", e.target.files[0])}
@@ -158,9 +156,7 @@ function AddSong() {
         )}
 
         <div className={styles.card}>
-          <label className={styles.label} >
-            Last update :{" "}
-          </label>
+          <label className={styles.label}>Last update : </label>
           {/* <label  style={{ color: "#fff" }}>{selectedSong.updateAt}</label> */}
           <Input
             name="updateAt"
@@ -173,10 +169,14 @@ function AddSong() {
           />
         </div>
 
-        <Button loading={isLoading} htmlType="submit" className={styles.button} type="primary">
+        <Button
+          loading={isLoading}
+          htmlType="submit"
+          className={styles.button}
+          type="primary"
+        >
           Add Song
         </Button>
-
       </form>
     </div>
   );
