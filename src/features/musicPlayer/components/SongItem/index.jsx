@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useHistory } from "react-router-dom";
 import SongList from "../SongList";
@@ -6,10 +6,15 @@ import { Button, Card, Table, Image } from "antd";
 import SongAudio from "common/components/audio";
 import { deleteSongAction } from "features/musicPlayer/action";
 import swal from "sweetalert";
+import { useTranslation } from "react-i18next";
 
 function SongItem(props) {
   const history = useHistory();
-
+  const { t, i18n } = useTranslation();
+  let language = localStorage.getItem("i18nextLng");
+  useEffect(() => {
+    i18n.changeLanguage(language);
+  }, [language]);
   const goToDetail = (id) => {
     history.push("/detail/" + id);
   };
@@ -22,7 +27,7 @@ function SongItem(props) {
 
   const column = [
     {
-      title: "Name",
+      title: `${t("Name")}`,
       dataIndex: "name",
       render: (_, songs) => {
         return (
@@ -41,15 +46,15 @@ function SongItem(props) {
       },
     },
     {
-      title: "Author",
+      title: `${t("Author")}`,
       dataIndex: "author",
     },
     {
-      title: "Gerne",
+      title: `${t("Genre")}`,
       dataIndex: "genre",
     },
     {
-      title: "Audio",
+      title: `${t("Audio")}`,
       dataIndex: "src",
       render: (_, songs) => {
         return <SongAudio songs={songs} />;
@@ -57,7 +62,7 @@ function SongItem(props) {
     },
 
     {
-      title: "Action",
+      title: `${t("Action")}`,
       key: "action",
       render: (_, songs) => {
         return (
@@ -72,9 +77,10 @@ function SongItem(props) {
               className="mr-5 pointer-events-auto ml-8 rounded-md bg-indigo-600 py-2 px-3 text-[0.8025rem] font-semibold leading-5 text-white hover:bg-indigo-500"
               to={`/detail/${songs.id}`}
             >
-              Update
+              {t("Update")}
             </NavLink>
             <Button
+              className="rounded-md"
               type="primary"
               onClick={() =>
                 swal({
@@ -90,7 +96,7 @@ function SongItem(props) {
               }
               danger
             >
-              Delete
+              {t("Delete")}
             </Button>
           </>
         );

@@ -10,6 +10,7 @@ import { AudioOutlined } from "@ant-design/icons";
 import Search from "antd/lib/transfer/search";
 import styles from "./style.module.css";
 import { useHistory } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 function Home() {
   const dispatch = useDispatch();
@@ -17,7 +18,12 @@ function Home() {
   const [searchTerm, setSearchTerm] = useState("");
   const history = useHistory();
   const { Search } = Input;
+  const { t, i18n } = useTranslation();
+  let language = localStorage.getItem("i18nextLng");
 
+  useEffect(() => {
+    i18n.changeLanguage(language);
+  }, [language]);
   const goToAddSong = () => {
     history.push("/addSong");
   };
@@ -30,9 +36,7 @@ function Home() {
   }, []);
 
   return (
-    <div
-      className="container"
-    >
+    <div className="container">
       <h1
         style={{
           textAlign: "center",
@@ -40,7 +44,7 @@ function Home() {
           marginTop: 20,
         }}
       >
-        SONG LIST
+        {t("Song List")}
       </h1>
       <div className={styles.features}>
         <button
@@ -48,7 +52,7 @@ function Home() {
           htmlType="submit"
           className={styles.button}
         >
-          <span className={styles.buttonText}>Add Song</span>
+          <span className={styles.buttonText}>{t("Add song")}</span>
           <span className={styles.buttonIcon}>
             <ion-icon name="add-circle-outline"></ion-icon>
           </span>
@@ -57,9 +61,9 @@ function Home() {
         <Space className={styles.search}>
           <Search
             style={{ fontSize: 25, width: 400 }}
-            placeholder="Search song"
+            placeholder={t("Search song")}
             allowClear
-            enterButton="Search"
+            enterButton={t("Search")}
             size="large"
             onSearch={onSearch}
             onChange={(e) => {

@@ -13,6 +13,8 @@ import { NavLink, Redirect, Route, useHistory } from "react-router-dom";
 import SubMenu from "antd/lib/menu/SubMenu";
 import { useDispatch, useSelector } from "react-redux";
 import { SET_PROFILE } from "../../../features/authentication/action";
+import i18n from "i18";
+import { useTranslation } from "react-i18next";
 
 function AdminTemplate(props) {
   const { Header, Content, Footer, Sider } = Layout;
@@ -22,6 +24,7 @@ function AdminTemplate(props) {
   const history = useHistory();
   const dispatch = useDispatch();
   const { Option } = Select;
+  const { t, i18n } = useTranslation();
 
   const [collapsed, setCollapsed] = useState(false);
 
@@ -29,7 +32,6 @@ function AdminTemplate(props) {
     e.preventDefault();
     localStorage.removeItem("token");
     localStorage.removeItem("USER_LOGIN");
-
 
     dispatch({
       type: SET_PROFILE,
@@ -39,13 +41,17 @@ function AdminTemplate(props) {
     history.push("/Signin");
   };
 
+  const handleLanguage = (value) => {
+    i18n.changeLanguage(value);
+  };
+
   const renderUserProfile = () => {
     if (localStorage.getItem("USER_LOGIN")) {
       user = JSON.parse(localStorage.getItem("USER_LOGIN"));
       return (
         <>
           <a className="ml-3" style={{ color: "white" }} href="#">
-            Hi, {user[0]}
+            {t("Hi")}, {user[0]}
             {user[1]}
             {user[2]}
             {user[3]}
@@ -57,7 +63,7 @@ function AdminTemplate(props) {
             href="#"
             onClick={handleLogout}
           >
-            Log out
+            {t("Log out")}
           </a>
         </>
       );
@@ -69,7 +75,7 @@ function AdminTemplate(props) {
           className="mr-5 pointer-events-auto ml-8 rounded-md bg-indigo-600 py-2 px-3 text-[0.8125rem] font-semibold leading-5 text-white hover:bg-indigo-500"
           to="/Signin"
         >
-          Sign in
+          {t("Sign in")}
         </NavLink>
       </>
     );
@@ -125,6 +131,17 @@ function AdminTemplate(props) {
                     padding: 0,
                   }}
                 >
+                  <Select
+                    className="mr-5"
+                    onChange={handleLanguage}
+                    defaultValue="en"
+                    style={{
+                      width: 70,
+                    }}
+                  >
+                    <Option value="en">Eng</Option>
+                    <Option value="vi">VIE</Option>
+                  </Select>
                   {renderUserProfile()}
                 </Header>
                 <Content>
