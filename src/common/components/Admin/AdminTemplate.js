@@ -109,8 +109,8 @@ function AdminTemplate(props) {
                   mode="inline"
                 >
                   <SubMenu key="sub1" icon={<FileOutlined />} title="Song">
-                    <Menu.Item key="/home" icon={<VideoCameraOutlined />}>
-                      <NavLink to="/home">Song</NavLink>
+                    <Menu.Item key="/" icon={<VideoCameraOutlined />}>
+                      <NavLink to="/">Song</NavLink>
                     </Menu.Item>
                     <Menu.Item key="/addSong" icon={<VideoCameraOutlined />}>
                       <NavLink to="/addSong">Add Song</NavLink>

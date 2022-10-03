@@ -58,7 +58,7 @@ export const deleteSongAction = (songId) => {
         swal({
           title: "Deleted!",
           text: "Song Deleted Successfully",
-          icon: "warning",
+          icon: "success",
           button: "OK",
         });
       }

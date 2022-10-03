@@ -5,6 +5,7 @@ import SongList from "../SongList";
 import { Button, Card, Table, Image } from "antd";
 import SongAudio from "common/components/audio";
 import { deleteSongAction } from "features/musicPlayer/action";
+import swal from "sweetalert";
 
 function SongItem(props) {
   const history = useHistory();
@@ -68,11 +69,27 @@ function SongItem(props) {
                 localStorage.setItem("songDetail", JSON.stringify(songs));
               }}
               type="primary"
+              className="mr-5 pointer-events-auto ml-8 rounded-md bg-indigo-600 py-2 px-3 text-[0.8025rem] font-semibold leading-5 text-white hover:bg-indigo-500"
               to={`/detail/${songs.id}`}
             >
               Update
             </NavLink>
-            <Button type="primary" onClick={() => deleteSong(songs.id)} danger>
+            <Button
+              type="primary"
+              onClick={() =>
+                swal({
+                  title: "Are you sure?",
+                  text: "Are you sure that you want to delete this song?",
+                  icon: "warning",
+                  dangerMode: true,
+                }).then((willDelete) => {
+                  if (willDelete) {
+                    deleteSong(songs.id);
+                  }
+                })
+              }
+              danger
+            >
               Delete
             </Button>
           </>

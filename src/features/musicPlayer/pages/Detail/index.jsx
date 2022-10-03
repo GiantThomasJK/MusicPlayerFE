@@ -129,7 +129,7 @@ function Detail(props) {
     <>
       <button
         onClick={() => {
-          history.push("/home");
+          history.push("/");
         }}
         type="submit"
         className="bg-blue-400 hover:bg-blue-600 text-white p-2"

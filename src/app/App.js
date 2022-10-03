@@ -30,7 +30,7 @@ function App() {
           redirectPath="/Signin"
         /> */}
         <AdminTemplate path="/Signin" exact Component={SignIn} />
-        <AdminTemplate path="/home" exact Component={Home} />
+        <AdminTemplate path="/" exact Component={Home} />
         <AdminTemplate path="/addSong" exact Component={AddSong} />
         <AdminTemplate path="/detail/:id" exact Component={Detail} />
 

@@ -32,50 +32,15 @@ function SignIn() {
       console.log(values);
       await dispatch(signInAction(values));
       if (localStorage.getItem("USER_LOGIN")) {
-        history.push("/home");
+        history.push("/");
       }
     },
 
     validationSchema: schema,
   });
 
-
   return (
     <div>
-      <h2 className={styles.title}>Sign In</h2>
-      {/* <form onSubmit={formik.handleSubmit} className={styles.form}>
-        <Input
-          name="username"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          className={styles.input}
-          type="text"
-          placeholder="Username"
-        />
-        {formik.touched.username && formik.errors.username && (
-          <p className={styles.errorText}>{formik.errors.username}</p>
-        )}
-        <Input
-          name="password"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          className={styles.input}
-          type="password"
-          placeholder="Password"
-        />
-        {formik.touched.password && formik.errors.password && (
-          <p className={styles.errorText}>{formik.errors.password}</p>
-        )}
-        <Button
-          htmlType="submit"
-          className={styles.input}
-          type="primary"
-          loading={isLoading}
-        >
-          Login
-        </Button>
-      </form> */}
-
       <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div className="w-full max-w-md space-y-8">
           <div>
